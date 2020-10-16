@@ -47,6 +47,7 @@ void dgemm1(const double *A, const double *B, double *C, const int n)
 //Register Reuse part 2
 void dgemm2(const double *A, const double *B, double *C, const int n) 
 {
+    //magi
 
 }
 //Register Reuse part 2 End
