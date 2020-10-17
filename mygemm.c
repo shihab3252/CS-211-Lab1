@@ -490,17 +490,15 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
                                 c21 += a2 * b1;
                                 c22 += a2 * b2;
                         }
-                        C[i*n + j] = c00;
-                        C[i*n + j+1] = c01;
-                        C[i*n + j+2] = c02;
-
-                        C[(i+1)*n + j] = c10;
-                        C[(i+1)*n + j+1] = c11;
-                        C[(i+1)*n + j+2] = c12;
-
-                        C[(i+2)*n + j] = c20;
-                        C[(i+2)*n + j+1] = c21;
-                        C[(i+2)*n + j+2] = c22;
+                        C[t] = c00;
+                        C[t + 1] = c01;
+                        C[t + 2] = c02;
+                        C[tt] = c10;
+                        C[tt + 1] = c11;
+                        C[tt + 2] = c12;
+                        C[ttt] = c20;
+                        C[ttt + 1] = c21;
+                        C[ttt + 2] = c22;
 
                     }
                 }
