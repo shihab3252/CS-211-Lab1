@@ -507,4 +507,5 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
                 }
             }
         }
+   }
 }
