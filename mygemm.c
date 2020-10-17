@@ -445,13 +445,9 @@ void bkji(const double *A, const double *B, double *C, const int n, const int b)
 //Cache Reuse part 4
 void optimal(const double* A, const double* B, double *C, const int n, const int b)
 {
-    /*
-    int i;
-   for ( i = 0; i < n; i += b) {
-       int j;
-        for ( j = 0; j < n; j += b) {
-            int k;
-            for ( k = 0; k < n; k += b) {
+        for (int i = 0; i < n; i += b) {
+        for (int j = 0; j < n; j += b) {
+            for (int k = 0; k < n; k += b) {
                 int i1 = i, j1 = j, k1 = k;
                 int ni = i + b > n ? n : i + b;
                 int nj = j + b > n ? n : j + b;
@@ -472,17 +468,18 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
                         register double c21 = C[ttt + 1];
                         register double c22 = C[ttt + 2];
 
-                        for (k1 = k; k1 < nk; k1++) {
-                                int ta = i1 * n + k1;
+                        for (k1 = k; k1 < nk; k1 += 3) {
+                            for (int l = 0; l < 3; l++) {
+                                int ta = i1 * n + k1 + l;
                                 int tta = ta + n;
                                 int ttta = tta + n;
-                                int tb = k1 * n + j1 * n;
+                                int tb = k1 * n + j1 + l * n;
                                 register double a0 = A[ta];
                                 register double a1 = A[tta];
                                 register double a2 = A[ttta];
-                                register double b0 = B[tb];
-                                register double b1 = B[tb + 1];
-                                register double b2 = B[tb + 2];
+                                register double b0 = A[tb];
+                                register double b1 = A[tb + 1];
+                                register double b2 = A[tb + 2];
 
                                 c00 += a0 * b0;
                                 c01 += a0 * b1;
@@ -493,6 +490,7 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
                                 c20 += a2 * b0;
                                 c21 += a2 * b1;
                                 c22 += a2 * b2;
+                            }
                         }
                         C[t] = c00;
                         C[t + 1] = c01;
@@ -508,8 +506,7 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
                 }
             }
         }
-   }
-   */
+  /*
     int i = 0;
     for (i = 0; i < n; i += b)
     {
@@ -577,4 +574,5 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
             }
         }
     }
+    */
 }
