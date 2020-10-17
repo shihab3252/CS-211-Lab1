@@ -25,7 +25,9 @@ int main(int argc, char *argv[])
     char *func_name_cache[] = {"ijk ", "jik ", "kij ", "ikj ", "jki ", "kji ",
                                "bijk", "bjik", "bkij", "bikj", "bjki", "bkji"};
     int matrix_dim = 2000;
-    int block_size=10;
+    int block_size[]={10, 20, 40, 10, 200, 400, 1000};
+    for(int bl=0; bl<7; bl++){
+    printf("----------BLOCK SIZE: %d -------------- \n", block_size[bl]);
     int method_nums = sizeof(func_name_cache) / sizeof(func_name_cache[0]);
     double t0, t1;
     double *result = (double *)malloc(sizeof(double) * method_nums * 2);
@@ -47,7 +49,7 @@ int main(int argc, char *argv[])
 
     for (i = 0; i < method_nums; i++)
     {
-        time_measurement_block(algorithm_ptr[i], func_name_cache[i], A, B, C[i], matrix_dim, block_size, &result[i * 2]);
+        time_measurement_block(algorithm_ptr[i], func_name_cache[i], A, B, C[i], matrix_dim, block_size[bl], &result[i * 2]);
         t0 = get_sec();
         cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, matrix_dim, matrix_dim, matrix_dim, 1., A, matrix_dim, B, matrix_dim, 1., C_verify[i], matrix_dim);
         t1 = get_sec();
@@ -72,5 +74,6 @@ int main(int argc, char *argv[])
     }
 
     free(result);
+    }
     return 0;
 }

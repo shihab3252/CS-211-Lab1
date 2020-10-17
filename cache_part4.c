@@ -23,7 +23,9 @@ int main(int argc, char *argv[])
     int b;
 
     int matrix_dim = 2046;
-    int block_size= 66;
+    int block_size[]= {6, 18, 33, 66, 126, 258, 510, 1023};
+    for(int bl = 0; bl<8; bl++){
+    printf("----------BLOCK SIZE: %d ------------- \n", block_size[bl]);
     double t0, t1, elapsed_time, MKL_elapsed_time;
     double *A = (double *)malloc(sizeof(double) * matrix_dim * matrix_dim);
     double *B = (double *)malloc(sizeof(double) * matrix_dim * matrix_dim);
@@ -36,7 +38,7 @@ int main(int argc, char *argv[])
     if ( matrix_copy(C_verify, C, matrix_dim, matrix_dim) ) return -1;
 
     t0 = get_sec();
-    optimal(A, B, C, matrix_dim,block_size);
+    optimal(A, B, C, matrix_dim,block_size[bl]);
     t1 = get_sec();
     elapsed_time = t1 - t0;
 
@@ -55,6 +57,7 @@ int main(int argc, char *argv[])
     free(C_verify);
 
     printf("elapsed time is %8.5f second(s).\n", elapsed_time);
+    }
 
     return 0;
 }
