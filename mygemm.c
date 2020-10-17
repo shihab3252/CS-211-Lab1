@@ -445,9 +445,10 @@ void bkji(const double *A, const double *B, double *C, const int n, const int b)
 //Cache Reuse part 4
 void optimal(const double* A, const double* B, double *C, const int n, const int b)
 {
-        for (int i = 0; i < n; i += b) {
-        for (int j = 0; j < n; j += b) {
-            for (int k = 0; k < n; k += b) {
+    int i,j,k,l;
+        for (i = 0; i < n; i += b) {
+        for (j = 0; j < n; j += b) {
+            for (k = 0; k < n; k += b) {
                 int i1 = i, j1 = j, k1 = k;
                 int ni = i + b > n ? n : i + b;
                 int nj = j + b > n ? n : j + b;
@@ -469,7 +470,7 @@ void optimal(const double* A, const double* B, double *C, const int n, const int
                         register double c22 = C[ttt + 2];
 
                         for (k1 = k; k1 < nk; k1 += 3) {
-                            for (int l = 0; l < 3; l++) {
+                            for (l = 0; l < 3; l++) {
                                 int ta = i1 * n + k1 + l;
                                 int tta = ta + n;
                                 int ttta = tta + n;
